@@ -56,11 +56,14 @@ interface Tunnel1
  tunnel destination **GW1_Public_IP**
  tunnel protection ipsec profile azure-vti
 exit
-
+!
+interface Loopback0
+ ip address **LOOPBACK_IP**
 !
 router bgp **BGP_ID**
  bgp router-id interface GigabitEthernet1
  bgp log-neighbor-changes
+ network **LOOPBACK_IP** mask 255.255.255.255
  neighbor **GW0_Private_IP** remote-as 65515
  neighbor **GW0_Private_IP** ebgp-multihop 5
  neighbor **GW0_Private_IP** update-source GigabitEthernet1
